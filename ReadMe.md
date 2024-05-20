@@ -25,7 +25,6 @@ To run the tests, execute the following command in bash:
 node tests.js
 
 Assumption is that node.js is installed already if not perform these steps
-cd tvotests
 npm init -y
 npm install selenium-webdriver
 npm install chromedriver
