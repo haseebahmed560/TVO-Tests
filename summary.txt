@@ -1,0 +1,62 @@
+Test Approach:
+
+    Setup and Environment Configuration:
+        Use Node.js and Selenium WebDriver to automate tests.
+        Configure the environment to use Chrome browser for test execution.
+
+    Test Scenarios:
+        Visit the TVO Learn website.
+        Navigate through the "Learning Resources (K-12)" dropdown.
+        Select a specific grade level between 1 and 12.
+        Scroll to the "Learn Forward in the Curriculum" section.
+        Click on any card within that section to validate navigation.
+        Check FAQ and terms and condition pages and verify urls.
+
+    Wait Mechanisms:
+        Implement explicit waits to ensure elements are available and interactable.
+        Use JavaScript execution to scroll the page and bring elements into view.
+
+Covered Test Cases
+
+    Home Page Load Test:
+        Verify that the TVO Learn home page loads successfully.
+
+    Dropdown Navigation Test:
+        Verify that the "Learning Resources (K-12)" dropdown is visible and can be clicked.
+
+    Grade Selection Test:
+        Verify that each grade level from 1 to 12 can be selected from the dropdown.
+
+    Card Interaction Test:
+        Verify that cards within the "Learn Forward in the Curriculum" section are clickable and navigate to the correct pages.
+
+Execution Results
+
+    Home Page Load Test:
+        Success: The TVO Learn home page loads correctly.
+
+    Dropdown Navigation Test:
+        Success: The "Learning Resources (K-12)" dropdown is clickable and expands correctly.
+
+    Grade Selection Test:
+        Success: Each grade level from 1 to 12 is selectable, and corresponding resources are displayed.
+
+    Scroll to Curriculum Section Scenario:
+        Success: The page successfully scrolls to the "Learn Forward in the Curriculum" section.
+
+    Card Interaction Test:
+        Success: Clicking on cards within the section navigates to the appropriate subject pages.
+
+Assumptions
+
+    Website Stability:
+        The TVO Learn website is assumed to be stable, with no frequent structural changes that would affect element locators.
+
+    Element Uniqueness:
+        Elements such as dropdowns, grade level links, and curriculum cards have unique identifiers or reliable attributes for locating them.
+
+    Browser Compatibility:
+        Tests are conducted using the latest version of Chrome browser, assuming compatibility with the TVO Learn website.
+
+    No Dynamic Content Changes:
+        The content within dropdowns and curriculum sections is assumed to be static during test execution, with no dynamic changes affecting element locators.

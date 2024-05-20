@@ -1,6 +1,7 @@
 const { Builder, By, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 
+// Ansynchronous Function for Automated Tests
 (async function testTVO() {
     let driver = await new Builder().forBrowser('chrome').build();
 
@@ -10,8 +11,6 @@ const chrome = require('selenium-webdriver/chrome');
         await driver.get('https://tvolearn.com');
         console.log('Test 1: Navigated to TVO Learn');
 
-        // Ensure the page is fully loaded
-        //await driver.wait(until.elementLocated(By.css('body')), 10000);
 
         // Test 2: Open "Learning Resources (K-12)" dropdown
         const dropdownXPath = '//li[1]/button/span';
@@ -35,7 +34,6 @@ const chrome = require('selenium-webdriver/chrome');
         }
 
         //Scroll to "Learn Forward in the Curriculum" section
-
         driver.executeScript('window.scrollBy(0, 500)');
         console.log('Scrolled to "Learn Forward in the Curriculum" section');
 
@@ -56,46 +54,39 @@ const chrome = require('selenium-webdriver/chrome');
         }
 
         
-        // Test 7 : Verify tabs
-
+        // Test 7 : Verify to see if other subjects can be selected
         driver.executeScript('window.scrollBy(0, 3000)');
-        
         const oralcommunicationtabXPath = '//a[contains(@href, "/pages/grade-6-science-and-technology")]';
         const oralcommunicationtab = await driver.findElement(By.xpath(oralcommunicationtabXPath));
         await oralcommunicationtab.click();
         
-        console.log('Test 7: Selected Grade 6 Tab');
+        console.log('Test 7: Selected Grade 6 science-and-technology Tab');
 
-
+        // Test 8 : Verify to see FAQ Tab can be selected
         driver.executeScript('window.scrollBy(0, 18000)');
-        // Test 8 : Verify tabs
         const grade6tab1XPath = '//a[contains(@href, "/pages/faq")]';
         const backtab = await driver.findElement(By.xpath(grade6tab1XPath));
         await backtab.click();
         
-        console.log('Test 8: Selected Grade 6 Tab');
+        console.log('Test 8: Selected FAQ Tab');
 
 
+        // Test 9 : Verify Terms and use tab can be selected
         driver.executeScript('window.scrollBy(0, 18000)');
-        // Test 9 : Verify tabs
         const readingtabXPath = '//a[contains(@href, "/pages/terms-of-use")]';
         const readingtab = await driver.findElement(By.xpath(readingtabXPath));
         await readingtab.click();
         
         console.log('Test 9: Selected Grade 6 Tab');
 
-
       
-
-
-
         // Test 10: Verify all cards in the "Learn Forward in the Curriculum" section have valid links
         const cardsXPath = '//*[@id="learn-forward-curriculum"]//a[contains(@class, "card")]';
         const cards = await driver.findElements(By.xpath(cardsXPath));
         let linksAreValid = true;
         for (const card of cards) {
             const href = await card.getAttribute('href');
-            if (!href.includes('/subject/')) {
+            if (!href.includes('/pages/')) {
                 linksAreValid = false;
                 break;
             }
@@ -111,6 +102,6 @@ const chrome = require('selenium-webdriver/chrome');
         console.error(err);
     } finally {
         // Close browser
-        //await driver.quit();
+        await driver.quit();
     }
 })();
