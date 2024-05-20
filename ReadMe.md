@@ -24,7 +24,9 @@ This project contains automated tests for the TVO Learn website using Selenium W
 To run the tests, execute the following command in bash:
 node tests.js
 
-Assumption is that node.js is installed already if not perform these steps
+
+Assumption is that node.js is installed already if not perform these steps:
+
 npm init -y
 npm install selenium-webdriver
 npm install chromedriver
