@@ -34,22 +34,83 @@ const chrome = require('selenium-webdriver/chrome');
             console.log('Test 4: URL verification failed');
         }
 
-        // Test 5: Scroll to "Learn Forward in the Curriculum" section
+        //Scroll to "Learn Forward in the Curriculum" section
 
         driver.executeScript('window.scrollBy(0, 500)');
+        console.log('Scrolled to "Learn Forward in the Curriculum" section');
 
-        const Element = driver.findElement(By.xpath('/html/body/div[4]/main/div[2]/div[3]/div/div/div[2]/div[1]/div'));
 
-        // Scrolling down the page till the element is found		
-        await driver.executeScript("arguments[0].scrollIntoView();", Element);
+        // Test 5: Click on a card within the "Learn Forward in the Curriculum" section
+        const cardXPath = '//a[contains(@href, "/pages/grade-6-language")]';
+        const card = await driver.findElement(By.xpath(cardXPath));
+        await card.click();
+        await driver.wait(until.urlContains('grade-6-language'), 10000);
+        console.log('Test 5: Clicked on a card within the "Learn Forward in the Curriculum" section');
 
-        console.log('Test 5: Scrolled to "Learn Forward in the Curriculum" section');
+        // Test 6 : Verify URL contains /grade6-language/
+        const newUrl = await driver.getCurrentUrl();
+        if (newUrl.includes('grade-6-language')) {
+            console.log('Test 6: URL verification passed');
+        } else {
+            console.log('Test 6: URL verification failed');
+        }
+
+        
+        // Test 7 : Verify tabs
+
+        driver.executeScript('window.scrollBy(0, 3000)');
+        
+        const oralcommunicationtabXPath = '//a[contains(@href, "/pages/grade-6-science-and-technology")]';
+        const oralcommunicationtab = await driver.findElement(By.xpath(oralcommunicationtabXPath));
+        await oralcommunicationtab.click();
+        
+        console.log('Test 7: Selected Grade 6 Tab');
+
+
+        driver.executeScript('window.scrollBy(0, 18000)');
+        // Test 8 : Verify tabs
+        const grade6tab1XPath = '//a[contains(@href, "/pages/faq")]';
+        const backtab = await driver.findElement(By.xpath(grade6tab1XPath));
+        await backtab.click();
+        
+        console.log('Test 8: Selected Grade 6 Tab');
+
+
+        driver.executeScript('window.scrollBy(0, 18000)');
+        // Test 9 : Verify tabs
+        const readingtabXPath = '//a[contains(@href, "/pages/terms-of-use")]';
+        const readingtab = await driver.findElement(By.xpath(readingtabXPath));
+        await readingtab.click();
+        
+        console.log('Test 9: Selected Grade 6 Tab');
+
+
+      
+
+
+
+        // Test 10: Verify all cards in the "Learn Forward in the Curriculum" section have valid links
+        const cardsXPath = '//*[@id="learn-forward-curriculum"]//a[contains(@class, "card")]';
+        const cards = await driver.findElements(By.xpath(cardsXPath));
+        let linksAreValid = true;
+        for (const card of cards) {
+            const href = await card.getAttribute('href');
+            if (!href.includes('/subject/')) {
+                linksAreValid = false;
+                break;
+            }
+        }
+        if (linksAreValid) {
+            console.log('Test 10: All cards have valid links');
+        } else {
+            console.log('Test 10: Some cards have invalid links');
+        }
 
        
     } catch (err) {
         console.error(err);
     } finally {
         // Close browser
-        await driver.quit();
+        //await driver.quit();
     }
 })();
